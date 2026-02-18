@@ -1,5 +1,5 @@
 /**
- * CyberSec PSG – App: snap scroll, 3D carousel, glossary, fog, timer
+ * CyberSec PSG – App: snap scroll, 3D carousel, auto-glossary, fog, clock
  */
 (function() {
   'use strict';
@@ -17,11 +17,12 @@
     pages[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
     setTimeout(() => { isScrolling = false; }, scrollCooldown);
     updateProgress();
+    updateGlossary();
   }
 
   // Mouse wheel
   window.addEventListener('wheel', (e) => {
-    if (e.target.closest('.carousel-3d')) return; // let carousel handle
+    if (e.target.closest('.carousel-3d')) return;
     e.preventDefault();
     if (isScrolling) return;
     if (e.deltaY > 30) scrollToPage(currentPage + 1);
@@ -43,12 +44,15 @@
   // Detect current page on manual scroll
   function detectCurrentPage() {
     const windowH = window.innerHeight;
+    let changed = false;
     pages.forEach((page, i) => {
       const rect = page.getBoundingClientRect();
       if (rect.top >= -windowH * 0.3 && rect.top <= windowH * 0.3) {
+        if (currentPage !== i) changed = true;
         currentPage = i;
       }
     });
+    if (changed) updateGlossary();
   }
 
   // ==================== PROGRESS PANEL ====================
@@ -96,7 +100,6 @@
   });
 
   // ==================== 3D CAROUSEL ====================
-  // Track which carousel is visible for global keyboard
   let activeCarousel = null;
 
   document.querySelectorAll('[data-carousel]').forEach(carousel => {
@@ -108,7 +111,6 @@
     let current = 0;
     const total = slides.length;
 
-    // Create dots
     slides.forEach((_, i) => {
       const dot = document.createElement('button');
       dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
@@ -133,19 +135,15 @@
         else if (diff > 1) slide.classList.add('far-next');
         else slide.classList.add('far-prev');
       });
-
       dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
         d.classList.toggle('active', i === current);
       });
     }
 
-    // Init
     updateSlides();
-
     prevBtn.addEventListener('click', () => goTo(current - 1));
     nextBtn.addEventListener('click', () => goTo(current + 1));
 
-    // Swipe
     let startX = 0;
     carousel.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
     carousel.addEventListener('touchend', (e) => {
@@ -156,7 +154,6 @@
       }
     }, { passive: true });
 
-    // Track visibility for global keyboard
     const carouselObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) activeCarousel = { goTo, current: () => current };
@@ -170,7 +167,6 @@
   document.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
-    // Left/Right arrows → carousel (if visible)
     if (e.key === 'ArrowLeft' && activeCarousel) {
       e.preventDefault();
       activeCarousel.goTo(activeCarousel.current() - 1);
@@ -182,7 +178,6 @@
       return;
     }
 
-    // Up/Down arrows → page scroll
     if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
       e.preventDefault();
       scrollToPage(currentPage + 1);
@@ -195,42 +190,42 @@
     } else if (e.key === 'End') {
       e.preventDefault();
       scrollToPage(pages.length - 1);
-    } else if (e.key === 't' || e.key === 'T') {
-      document.getElementById('timer-toggle').click();
     }
   });
 
-  // ==================== GLOSSARY BAR (persistent) ====================
+  // ==================== AUTO-GLOSSARY (all visible terms) ====================
   const glossaryBar = document.getElementById('glossary-bar');
-  const glossaryTerm = document.getElementById('glossary-term');
-  const glossaryDef = document.getElementById('glossary-def');
-  const glossaryClose = document.getElementById('glossary-close');
+  const glossaryEntries = document.getElementById('glossary-entries');
 
-  function showGlossary(term, def) {
-    glossaryTerm.textContent = term;
-    glossaryDef.textContent = def;
+  function updateGlossary() {
+    const page = pages[currentPage];
+    if (!page) { glossaryBar.classList.add('hidden'); glossaryBar.classList.remove('visible'); return; }
+
+    const terms = page.querySelectorAll('.term[data-term][data-def]');
+    // Deduplicate by term name
+    const seen = new Map();
+    terms.forEach(el => {
+      const name = el.dataset.term;
+      if (!seen.has(name)) seen.set(name, el.dataset.def);
+    });
+
+    if (seen.size === 0) {
+      glossaryBar.classList.remove('visible');
+      glossaryBar.classList.add('hidden');
+      return;
+    }
+
+    glossaryEntries.innerHTML = '';
+    seen.forEach((def, term) => {
+      const entry = document.createElement('div');
+      entry.className = 'glossary-entry';
+      entry.innerHTML = '<span class="glossary-term">' + term + '</span><span class="glossary-sep">&mdash;</span><span class="glossary-def">' + def + '</span>';
+      glossaryEntries.appendChild(entry);
+    });
+
     glossaryBar.classList.remove('hidden');
     glossaryBar.classList.add('visible');
-    // No auto-hide – stays until closed or replaced
   }
-
-  function hideGlossary() {
-    glossaryBar.classList.remove('visible');
-    glossaryBar.classList.add('hidden');
-  }
-
-  glossaryClose.addEventListener('click', hideGlossary);
-
-  // Auto-show on hover, persistent (no auto-hide)
-  document.querySelectorAll('.term').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      showGlossary(el.dataset.term, el.dataset.def);
-    });
-    el.addEventListener('click', (e) => {
-      e.stopPropagation();
-      showGlossary(el.dataset.term, el.dataset.def);
-    });
-  });
 
   // ==================== COUNTER ANIMATION ====================
   const counterObserver = new IntersectionObserver((entries) => {
@@ -252,50 +247,18 @@
 
   document.querySelectorAll('.stat-number').forEach(el => counterObserver.observe(el));
 
-  // ==================== TIMER ====================
-  const elapsedEl = document.getElementById('elapsed-time');
-  const blockTimeEl = document.getElementById('block-time');
-  const toggleBtn = document.getElementById('timer-toggle');
-  const resetBtn = document.getElementById('timer-reset');
-  let timerRunning = false, startTime = null, pausedElapsed = 0, timerInterval = null;
-  const totalMs = 90 * 60 * 1000;
+  // ==================== CLOCK ====================
+  const clockEl = document.getElementById('current-clock');
 
-  function fmt(ms) {
-    const s = Math.max(0, Math.floor(ms / 1000));
-    return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+  function updateClock() {
+    const now = new Date();
+    const hh = String(now.getHours()).padStart(2, '0');
+    const mm = String(now.getMinutes()).padStart(2, '0');
+    if (clockEl) clockEl.textContent = hh + ':' + mm;
   }
 
-  function updateTimer() {
-    const elapsed = timerRunning ? (Date.now() - startTime + pausedElapsed) : pausedElapsed;
-    const remaining = totalMs - elapsed;
-    elapsedEl.textContent = fmt(elapsed);
-    blockTimeEl.textContent = (remaining < 0 ? '-' : '') + fmt(Math.abs(remaining));
-    blockTimeEl.className = 'timer-block-time' + (remaining < 0 ? ' over' : remaining < 300000 ? ' warning' : '');
-  }
-
-  toggleBtn.addEventListener('click', () => {
-    if (timerRunning) {
-      timerRunning = false;
-      pausedElapsed += Date.now() - startTime;
-      toggleBtn.innerHTML = '&#9654;';
-      clearInterval(timerInterval);
-    } else {
-      timerRunning = true;
-      startTime = Date.now();
-      toggleBtn.innerHTML = '&#9646;&#9646;';
-      timerInterval = setInterval(updateTimer, 500);
-    }
-    updateTimer();
-  });
-
-  resetBtn.addEventListener('click', () => {
-    timerRunning = false; startTime = null; pausedElapsed = 0;
-    toggleBtn.innerHTML = '&#9654;';
-    clearInterval(timerInterval);
-    updateTimer();
-  });
-
-  updateTimer();
+  updateClock();
+  setInterval(updateClock, 10000);
 
   // ==================== ANIMATED FOG BACKGROUND ====================
   const canvas = document.getElementById('bg-fog');
@@ -331,7 +294,6 @@
       t += 0.003;
       ctx.clearRect(0, 0, w, h);
 
-      // Base tint
       ctx.fillStyle = 'rgba(235, 240, 250, 0.3)';
       ctx.fillRect(0, 0, w, h);
 
@@ -364,4 +326,5 @@
 
   // Init
   updateProgress();
+  updateGlossary();
 })();

@@ -28,12 +28,8 @@
     <a href="#block6" class="progress-dot" data-block="block6"><span class="dot"></span><span class="dot-label">Lidský faktor</span></a>
     <a href="#conclusion" class="progress-dot" data-block="conclusion"><span class="dot"></span><span class="dot-label">Závěr</span></a>
   </div>
-  <div class="panel-timer">
-    <div class="timer-display"><span id="elapsed-time">00:00</span><span class="timer-sep">/</span><span id="block-time" class="timer-block-time">90:00</span></div>
-    <div class="timer-controls">
-      <button id="timer-toggle" title="Start/Pause (T)">&#9654;</button>
-      <button id="timer-reset" title="Reset">&#8634;</button>
-    </div>
+  <div class="panel-clock">
+    <span id="current-clock">--:--</span>
   </div>
 </nav>
 
@@ -47,15 +43,9 @@
   <div class="header-event">HR klastr &bull; 24. 2. 2026</div>
 </header>
 
-<!-- Bottom Glossary -->
+<!-- Bottom Glossary (auto-shows all visible terms) -->
 <div id="glossary-bar" class="glossary-bar hidden">
-  <div class="glossary-inner">
-    <span class="glossary-icon">&#128218;</span>
-    <span class="glossary-term" id="glossary-term"></span>
-    <span class="glossary-sep">&mdash;</span>
-    <span class="glossary-def" id="glossary-def"></span>
-  </div>
-  <button class="glossary-close" id="glossary-close">&times;</button>
+  <div class="glossary-entries" id="glossary-entries"></div>
 </div>
 
 <!-- ==================== MAIN CONTENT ==================== -->
@@ -69,7 +59,7 @@
       <p class="hero-subtitle animate-in delay-2">Zkušenosti, incidenty a&nbsp;směřování stavební firmy</p>
       <div class="hero-speaker animate-in delay-3">
         <div class="speaker-avatar">FK</div>
-        <div><strong>Filip Konečný</strong><span>IT Director, PSG Construction</span></div>
+        <div><strong>Filip Konečný</strong><span>Ředitel ICT, Stavební skupina PSG</span></div>
       </div>
       <div class="scroll-indicator animate-in delay-4"><span>&#8595;</span></div>
     </div>
@@ -157,7 +147,7 @@
 
   <!-- BLOK 2b: Co chybí -->
   <section class="page" data-block="block2">
-    <div class="page-header"><h2 class="hero-heading">Co nám ještě chybí <span class="tag-light">(upřímně)</span></h2></div>
+    <div class="page-header"><h2 class="hero-heading">Co nám ještě chybí <span class="tag-light"></span></h2></div>
     <div class="page-body">
       <div class="gaps-grid">
         <div class="gap-card"><div class="gap-icon">&#128241;</div><h4>Správa mobilů (<span class="term" data-term="MDM" data-def="Mobile Device Management – centrální správa a zabezpečení mobilních zařízení.">MDM</span>)</h4><p>Slepé místo v ochraně</p></div>
@@ -165,7 +155,6 @@
         <div class="gap-card"><div class="gap-icon">&#128161;</div><h4>Business Continuity</h4><p>Co když vypadne vše na 3 dny?</p></div>
         <div class="gap-card"><div class="gap-icon">&#128682;</div><h4>Off-boarding proces</h4><p>Odcházející si nesou přístupy</p></div>
       </div>
-      <div class="analogy-box"><span>&#9993;</span><p>Anti-phishing banner: <mark>„! Upozornění: externí komunikace !"</mark> – barvy měníme každé 3 měsíce</p></div>
     </div>
   </section>
 
@@ -307,7 +296,7 @@
       </div>
       <div class="damage-callout">
         <div class="damage-amount">~210 mil. Kč</div>
-        <p>Potenciální škoda + riziko zániku &bull; 30 % nezměnilo heslo ani po výzvě</p>
+        <p>Potenciální škoda PSG + riziko zániku &bull; 30 % nezměnilo heslo ani po výzvě</p>
       </div>
     </div>
   </section>
@@ -351,8 +340,7 @@
           <li>Zašifrované mohou být i zálohy</li>
           <li>Pro firmu <mark>likvidační účinky</mark></li>
         </ul>
-        <div class="analogy-box"><span>&#127959;</span><p>Jako zamknout celou stavbu i se všemi projekty a klíč vyhodit</p></div>
-      </div>
+        </div>
       <div>
         <h3>Akční kroky po kampani</h3>
         <ul class="compact-list">
@@ -392,7 +380,6 @@
       <div>
         <h3><span class="term" data-term="Zero Trust" data-def="Bezpečnostní model: ověřuj vždy, nevěř nikomu automaticky. Kontroluje se zařízení (splňuje bezpečnostní podmínky?) i uživatel (má oprávnění k dané akci?).">Zero Trust</span></h3>
         <p>Kontrola <strong>zařízení</strong> – splňuje bezpečnostní podmínky? Kontrola <strong>uživatele</strong> – má oprávnění k dané akci? Platí i pro AI agenty.</p>
-        <small class="analogy-inline">&#127959; Na lešení nepustíte nikoho bez BOZP – a ne každého na každé patro</small>
       </div>
       <div>
         <h3><span class="term" data-term="GRC" data-def="Governance, Risk, Compliance – řízení, řízení rizik a shoda s předpisy a regulacemi.">GRC</span> v SmartSuite</h3>
@@ -431,14 +418,13 @@
 
   <!-- BLOK 6b: Co plánujeme -->
   <section class="page" data-block="block6">
-    <div class="page-header"><h2 class="hero-heading">Co plánujeme</h2></div>
+    <div class="page-header"><h2 class="hero-heading">Co plánujeme s HR</h2></div>
     <div class="page-body">
       <h3>Digitalizace HR + IT procesů</h3>
       <ul class="compact-list">
         <li>Automatizace přístupů podle rolí</li>
         <li>Omezení lidských chyb</li>
-        <li>Sběr dat pro controlling</li>
-        <li>AI agenti pro onboarding a helpdesk</li>
+        <li>Digitalizace a automatizace procesů on-boardingu a off-boardingu</li>
       </ul>
     </div>
   </section>
@@ -456,12 +442,7 @@
     </div>
   </section>
 
-  <!-- DISKUSE (now before conclusion) -->
-  <section class="page page-discussion" data-block="discussion">
-    <div class="page-inner"><h2>Diskuse a sdílení</h2><p>Prostor pro otevřenou diskusi</p></div>
-  </section>
-
-  <!-- ZÁVĚR (now after discussion) -->
+  <!-- ZÁVĚR: 3 věci -->
   <section id="conclusion" class="page" data-block="conclusion" data-minutes="5">
     <div class="page-inner conclusion-content">
       <h2>3 věci, které si odnést</h2>
@@ -475,9 +456,23 @@
         <div class="step-card"><span>&#128172;</span><p>Máme <strong>IR plán</strong>?</p></div>
         <div class="step-card"><span>&#128218;</span><p>Školení <strong>bezpečnosti</strong></p></div>
       </div>
-      <div class="final-slide">
-        <h2>Děkuji za pozornost</h2>
-        <p>Filip Konečný &bull; IT Director &bull; PSG Construction</p>
+    </div>
+  </section>
+
+  <!-- DISKUSE -->
+  <section class="page page-discussion" data-block="discussion">
+    <div class="page-inner"><h2>Diskuse a sdílení</h2><p>Prostor pro otevřenou diskusi</p></div>
+  </section>
+
+  <!-- DĚKUJI -->
+  <section class="page page-thankyou" data-block="thankyou">
+    <div class="page-inner thankyou-content">
+      <h2>Děkuji za pozornost</h2>
+      <div class="thankyou-speaker">
+        <div class="speaker-avatar">FK</div>
+        <div class="thankyou-name">Filip Konečný</div>
+        <div class="thankyou-role">Ředitel ICT</div>
+        <div class="thankyou-company">Stavební skupina PSG</div>
       </div>
     </div>
   </section>
