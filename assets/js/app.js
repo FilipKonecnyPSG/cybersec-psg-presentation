@@ -191,10 +191,14 @@
 
   glossaryClose.addEventListener('click', hideGlossary);
 
-  // Attach to all .term elements
+  // Attach to all .term elements – auto-show on hover, hide on leave
   document.querySelectorAll('.term').forEach(el => {
     el.addEventListener('mouseenter', () => {
       showGlossary(el.dataset.term, el.dataset.def);
+    });
+    el.addEventListener('mouseleave', () => {
+      if (glossaryTimeout) clearTimeout(glossaryTimeout);
+      glossaryTimeout = setTimeout(hideGlossary, 2500);
     });
     el.addEventListener('click', (e) => {
       e.stopPropagation();
