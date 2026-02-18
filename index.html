@@ -11,6 +11,9 @@
 </head>
 <body>
 
+<!-- Animated fog background -->
+<canvas id="bg-fog"></canvas>
+
 <!-- Progress Panel (right) -->
 <nav id="progress-panel">
   <div class="progress-track">
@@ -44,19 +47,18 @@
   <div class="header-event">HR klastr &bull; 24. 2. 2026</div>
 </header>
 
-<!-- Background particles -->
-<canvas id="bg-particles"></canvas>
-
-<!-- Bottom Glossary Pop-up -->
+<!-- Bottom Glossary -->
 <div id="glossary-bar" class="glossary-bar hidden">
   <div class="glossary-inner">
+    <span class="glossary-icon">&#128218;</span>
     <span class="glossary-term" id="glossary-term"></span>
+    <span class="glossary-sep">&mdash;</span>
     <span class="glossary-def" id="glossary-def"></span>
   </div>
   <button class="glossary-close" id="glossary-close">&times;</button>
 </div>
 
-<!-- ==================== MAIN CONTENT (snap scroll) ==================== -->
+<!-- ==================== MAIN CONTENT ==================== -->
 <main id="content">
 
   <!-- HERO -->
@@ -77,7 +79,7 @@
   <section id="block1" class="page" data-block="block1" data-minutes="12">
     <div class="page-header">
       <span class="section-num">01</span>
-      <h2>PSG jako digitální firma</h2>
+      <h2 class="hero-heading">PSG jako digitální firma</h2>
     </div>
     <div class="page-body">
       <p class="lead">Nejsme jen stavební firma – jsme digitální organismus se stovkami zařízení a desítkami systémů.</p>
@@ -95,7 +97,7 @@
 
   <!-- BLOK 1b: Dopady útoku + 3 pilíře -->
   <section class="page" data-block="block1">
-    <div class="page-header"><h2>Co znamená útok &amp; jak se bránit</h2></div>
+    <div class="page-header"><h2 class="hero-heading">Co znamená útok &amp; jak se bránit</h2></div>
     <div class="page-body two-col-layout">
       <div>
         <h3>Dopady útoku na stavební firmu</h3>
@@ -119,7 +121,10 @@
 
   <!-- BLOK 2: JAK SE BRÁNÍME DNES -->
   <section id="block2" class="page" data-block="block2" data-minutes="12">
-    <div class="page-header overlay-blue"><span class="section-num">02</span><h2>Jak se bráníme dnes</h2></div>
+    <div class="page-header">
+      <span class="section-num">02</span>
+      <h2 class="hero-heading">Jak se bráníme dnes</h2>
+    </div>
     <div class="page-body">
       <div class="defense-row">
         <div class="defense-col">
@@ -152,7 +157,7 @@
 
   <!-- BLOK 2b: Co chybí -->
   <section class="page" data-block="block2">
-    <div class="page-header"><h2>Co nám ještě chybí <span class="tag-light">(upřímně)</span></h2></div>
+    <div class="page-header"><h2 class="hero-heading">Co nám ještě chybí <span class="tag-light">(upřímně)</span></h2></div>
     <div class="page-body">
       <div class="gaps-grid">
         <div class="gap-card"><div class="gap-icon">&#128241;</div><h4>Správa mobilů (<span class="term" data-term="MDM" data-def="Mobile Device Management – centrální správa a zabezpečení mobilních zařízení.">MDM</span>)</h4><p>Slepé místo v ochraně</p></div>
@@ -190,82 +195,79 @@
     </div>
   </section>
 
-  <!-- BLOK 3: INCIDENTY (carousel) -->
+  <!-- BLOK 3: INCIDENTY (3D carousel) -->
   <section id="block3" class="page" data-block="block3" data-minutes="10">
-    <div class="page-header overlay-red"><span class="section-num">03</span><h2>Reálné incidenty a&nbsp;poučení</h2></div>
+    <div class="page-header">
+      <span class="section-num">03</span>
+      <h2 class="hero-heading">Reálné incidenty a&nbsp;poučení</h2>
+    </div>
     <div class="page-body page-body-full">
       <p class="lead">Nebojíme se mluvit o vlastních chybách. Každá nás posunula dál.</p>
-      <div class="carousel" data-carousel>
-        <div class="carousel-track" data-carousel-track>
+      <div class="carousel-3d" data-carousel tabindex="0">
+        <div class="carousel-3d-viewport">
+          <div class="carousel-3d-track" data-carousel-track>
 
-          <div class="carousel-slide">
-            <div class="incident-card red">
-              <div class="incident-tag">Síťový útok</div>
-              <h3><span class="term" data-term="Brute force" data-def="Útok hrubou silou – automatické zkoušení tisíců kombinací hesel na přihlašovací systémy.">Brute force</span> útoky</h3>
-              <p>Masivní automatické pokusy o prolomení hesel ze zahraničních IP adres.</p>
-              <div class="incident-lesson"><strong>Poučení:</strong> Monitoring musí běžet 24/7.</div>
+            <div class="carousel-slide" data-index="0">
+              <div class="incident-card red">
+                <div class="incident-tag">Síťový útok</div>
+                <h3><span class="term" data-term="Brute force" data-def="Útok hrubou silou – automatické zkoušení tisíců kombinací hesel na přihlašovací systémy.">Brute force</span> útoky</h3>
+                <p>Masivní automatické pokusy o prolomení hesel ze zahraničních IP adres.</p>
+                <div class="incident-lesson"><strong>Poučení:</strong> Monitoring musí běžet 24/7.</div>
+              </div>
             </div>
-          </div>
 
-          <div class="carousel-slide">
-            <div class="incident-card orange">
-              <div class="incident-tag">Sociální inženýrství</div>
-              <h3><span class="term" data-term="Phishing" data-def="Podvodný e-mail nebo web, který se vydává za důvěryhodný zdroj s cílem získat citlivé údaje (hesla, čísla karet).">Phishing</span> – falešné faktury</h3>
-              <p>E-maily i telefonáty s požadavkem na úhradu falešných faktur. Znali naše lidi i projekty.</p>
-              <div class="incident-lesson"><strong>Poučení:</strong> Procesní ochrana je stejně důležitá jako technická.</div>
+            <div class="carousel-slide" data-index="1">
+              <div class="incident-card orange">
+                <div class="incident-tag">Sociální inženýrství</div>
+                <h3><span class="term" data-term="Phishing" data-def="Podvodný e-mail nebo web, který se vydává za důvěryhodný zdroj s cílem získat citlivé údaje (hesla, čísla karet).">Phishing</span> – falešné faktury</h3>
+                <p>E-maily i telefonáty s požadavkem na úhradu falešných faktur. Znali naše lidi i projekty.</p>
+                <div class="incident-lesson"><strong>Poučení:</strong> Procesní ochrana je stejně důležitá jako technická.</div>
+              </div>
             </div>
-          </div>
 
-          <div class="carousel-slide">
-            <div class="incident-card yellow">
-              <div class="incident-tag">Interní hrozba</div>
-              <h3>Únik citlivých dat</h3>
-              <p>Únik zakázkových odměn mimo oprávněné osoby. Narušení důvěry, právní riziko.</p>
-              <div class="incident-lesson"><strong>Poučení:</strong> Největší hrozba je často uvnitř firmy.</div>
+            <div class="carousel-slide" data-index="2">
+              <div class="incident-card yellow">
+                <div class="incident-tag">Interní hrozba</div>
+                <h3>Únik citlivých dat</h3>
+                <p>Únik zakázkových odměn mimo oprávněné osoby. Narušení důvěry, právní riziko.</p>
+                <div class="incident-lesson"><strong>Poučení:</strong> Největší hrozba je často uvnitř firmy.</div>
+              </div>
             </div>
-          </div>
 
-          <div class="carousel-slide">
-            <div class="incident-card purple">
-              <div class="incident-tag">Finanční dopad</div>
-              <h3>Zneužití prémiových SMS</h3>
-              <p>Platební SMS na firemních SIM kartách bez vědomí firmy. Mikroplatby, které se sčítaly.</p>
-              <div class="incident-lesson"><strong>Poučení:</strong> I malé věci mohou být drahé.</div>
+            <div class="carousel-slide" data-index="3">
+              <div class="incident-card gray">
+                <div class="incident-tag"><span class="term" data-term="Shadow IT" data-def="Neoficiálně nasazená technologie mimo správu IT – zařízení nebo software, o kterých IT oddělení neví.">Shadow IT</span></div>
+                <h3>Otevřené porty – kamery</h3>
+                <p>Kamery přístupné z internetu, heslo „servis". Historická konfigurace, o které IT nevědělo.</p>
+                <div class="incident-lesson"><strong>Poučení:</strong> Shadow IT = časovaná bomba.</div>
+              </div>
             </div>
-          </div>
 
-          <div class="carousel-slide">
-            <div class="incident-card gray">
-              <div class="incident-tag"><span class="term" data-term="Shadow IT" data-def="Neoficiálně nasazená technologie mimo správu IT – zařízení nebo software, o kterých IT oddělení neví.">Shadow IT</span></div>
-              <h3>Otevřené porty – kamery</h3>
-              <p>Kamery přístupné z internetu, heslo „servis". Historická konfigurace, o které IT nevědělo.</p>
-              <div class="incident-lesson"><strong>Poučení:</strong> Shadow IT = časovaná bomba.</div>
+            <div class="carousel-slide" data-index="4">
+              <div class="incident-card dark">
+                <div class="incident-tag">Kritický – Off-boarding</div>
+                <h3>Neodebraný přístup 2 měsíce</h3>
+                <p>Vedoucí obchodní přípravy měla po odchodu <strong>2 měsíce plný přístup</strong>. Nikdo z PSG přístup naopak neměl.</p>
+                <p>Riziko: únik obchodních dat, poškození reputace, omezení procesů.</p>
+                <div class="incident-lesson critical"><strong>Poučení:</strong> Off-boarding bez IT = časovaná bomba. HR + IT musí spolupracovat v reálném čase.</div>
+              </div>
             </div>
-          </div>
 
-          <div class="carousel-slide">
-            <div class="incident-card dark">
-              <div class="incident-tag">Kritický – Off-boarding</div>
-              <h3>Neodebraný přístup 2 měsíce</h3>
-              <p>Vedoucí obchodní přípravy měla po odchodu <strong>2 měsíce plný přístup</strong>. Nikdo z PSG přístup naopak neměl.</p>
-              <p>Riziko: únik obchodních dat, poškození reputace, omezení procesů.</p>
-              <div class="incident-lesson critical"><strong>Poučení:</strong> Off-boarding bez IT = časovaná bomba. HR + IT musí spolupracovat v reálném čase.</div>
-            </div>
           </div>
-
         </div>
         <div class="carousel-nav">
           <button class="carousel-btn prev" data-carousel-prev>&#8592;</button>
           <div class="carousel-dots" data-carousel-dots></div>
           <button class="carousel-btn next" data-carousel-next>&#8594;</button>
         </div>
+        <div class="carousel-hint">&#8592; &#8594; šipkami přepínáte incidenty</div>
       </div>
     </div>
   </section>
 
   <!-- BLOK 3b: Poučení -->
   <section class="page" data-block="block3">
-    <div class="page-header"><h2>Co jsme se naučili</h2></div>
+    <div class="page-header"><h2 class="hero-heading">Co jsme se naučili</h2></div>
     <div class="page-body">
       <div class="lessons-cards">
         <div class="lesson-card"><span class="lesson-num">1</span><p>Útočníkovi stačí <strong>jedna slabina</strong></p></div>
@@ -278,7 +280,10 @@
 
   <!-- BLOK 4: PHISHING KAMPAŇ -->
   <section id="block4" class="page" data-block="block4" data-minutes="15">
-    <div class="page-header overlay-dark"><span class="section-num">04</span><h2>Interní phishingové kampaně</h2></div>
+    <div class="page-header">
+      <span class="section-num">04</span>
+      <h2 class="hero-heading">Interní phishingové kampaně</h2>
+    </div>
     <div class="page-body">
       <div class="campaign-steps-row">
         <div class="campaign-step"><div class="step-num">1</div><h4><span class="term" data-term="Typosquatting" data-def="Registrace domény s překlepem (psgcz.cz vs. psg.cz), aby vypadala jako legitimní.">Typosquatting</span></h4><p><mark>psgcz.cz</mark> vs. psg.cz</p></div>
@@ -291,7 +296,7 @@
 
   <!-- BLOK 4b: Výsledky -->
   <section class="page" data-block="block4">
-    <div class="page-header"><h2>Výsledky kampaně 2025</h2></div>
+    <div class="page-header"><h2 class="hero-heading">Výsledky kampaně 2025</h2></div>
     <div class="page-body">
       <div class="stats-grid">
         <div class="stat-card"><div class="stat-number">200</div><div class="stat-label">e-mailů</div></div>
@@ -309,7 +314,7 @@
 
   <!-- BLOK 4c: Co mohl získat + indicie -->
   <section class="page" data-block="block4">
-    <div class="page-header"><h2>Co útočník mohl získat</h2></div>
+    <div class="page-header"><h2 class="hero-heading">Co útočník mohl získat</h2></div>
     <div class="page-body two-col-layout">
       <div>
         <div class="access-map">
@@ -336,7 +341,7 @@
 
   <!-- BLOK 4d: Ransomware + akce -->
   <section class="page" data-block="block4">
-    <div class="page-header"><h2><span class="term" data-term="Ransomware" data-def="Vyděračský software, který šifruje data a požaduje výkupné. Průměrné výkupné = 10 % ročního obratu.">Ransomware</span> &amp; akční kroky</h2></div>
+    <div class="page-header"><h2 class="hero-heading"><span class="term" data-term="Ransomware" data-def="Vyděračský software, který šifruje data a požaduje výkupné. Průměrné výkupné = 10 % ročního obratu.">Ransomware</span> &amp; akční kroky</h2></div>
     <div class="page-body two-col-layout">
       <div>
         <h3>Co hrozí reálně</h3>
@@ -362,7 +367,10 @@
 
   <!-- BLOK 5: KAM SMĚŘUJEME -->
   <section id="block5" class="page" data-block="block5" data-minutes="12">
-    <div class="page-header overlay-green"><span class="section-num">05</span><h2>Kam směřujeme</h2></div>
+    <div class="page-header">
+      <span class="section-num">05</span>
+      <h2 class="hero-heading">Kam směřujeme</h2>
+    </div>
     <div class="page-body">
       <h3>Microsoft 365 Security jako jednotný štít</h3>
       <p class="lead">Konec fragmentace. Jeden ekosystém pro správu, detekci i reakci + doplňující nástroje pro predikce a forenzní analýzy.</p>
@@ -379,12 +387,12 @@
 
   <!-- BLOK 5b: Zero Trust, Cloud, GRC -->
   <section class="page" data-block="block5">
-    <div class="page-header"><h2>Strategie a compliance</h2></div>
+    <div class="page-header"><h2 class="hero-heading">Strategie a compliance</h2></div>
     <div class="page-body three-col-layout">
       <div>
-        <h3><span class="term" data-term="Zero Trust" data-def="Bezpečnostní model, kde se ověřuje každý přístup – i zevnitř firmy. Nikomu nevěříme automaticky.">Zero Trust</span></h3>
-        <p>Princip nejmenších oprávnění. Platí i pro AI agenty.</p>
-        <small class="analogy-inline">&#127959; Na lešení nepustíte nikoho bez BOZP</small>
+        <h3><span class="term" data-term="Zero Trust" data-def="Bezpečnostní model: ověřuj vždy, nevěř nikomu automaticky. Kontroluje se zařízení (splňuje bezpečnostní podmínky?) i uživatel (má oprávnění k dané akci?).">Zero Trust</span></h3>
+        <p>Kontrola <strong>zařízení</strong> – splňuje bezpečnostní podmínky? Kontrola <strong>uživatele</strong> – má oprávnění k dané akci? Platí i pro AI agenty.</p>
+        <small class="analogy-inline">&#127959; Na lešení nepustíte nikoho bez BOZP – a ne každého na každé patro</small>
       </div>
       <div>
         <h3><span class="term" data-term="GRC" data-def="Governance, Risk, Compliance – řízení, řízení rizik a shoda s předpisy a regulacemi.">GRC</span> v SmartSuite</h3>
@@ -407,7 +415,10 @@
 
   <!-- BLOK 6: LIDSKÝ FAKTOR -->
   <section id="block6" class="page" data-block="block6" data-minutes="12">
-    <div class="page-header overlay-purple"><span class="section-num">06</span><h2>Lidský faktor a&nbsp;role HR</h2></div>
+    <div class="page-header">
+      <span class="section-num">06</span>
+      <h2 class="hero-heading">Lidský faktor a&nbsp;role HR</h2>
+    </div>
     <div class="page-body">
       <p class="lead callout-accent">80 % útoků začíná u člověka. Bezpečnost je zodpovědnost každého, ne jen IT.</p>
       <div class="hr-blocks">
@@ -418,37 +429,39 @@
     </div>
   </section>
 
-  <!-- BLOK 6b: Plány + výzva -->
+  <!-- BLOK 6b: Co plánujeme -->
   <section class="page" data-block="block6">
-    <div class="page-header"><h2>Co plánujeme &amp; výzva pro partnery</h2></div>
-    <div class="page-body two-col-layout">
-      <div>
-        <h3>Digitalizace HR + IT procesů</h3>
-        <ul class="compact-list">
-          <li>Automatizace přístupů podle rolí</li>
-          <li>Omezení lidských chyb</li>
-          <li>Sběr dat pro controlling</li>
-          <li>AI agenti pro onboarding a helpdesk</li>
-        </ul>
-      </div>
-      <div>
-        <h3>Výzva pro partnery</h3>
-        <div class="challenge-cards">
-          <div class="challenge-card"><p>Máte off-boarding, který IT informuje <strong>do 24h</strong>?</p></div>
-          <div class="challenge-card"><p>Víte, <strong>kdo</strong> má přístup <strong>k čemu</strong>?</p></div>
-          <div class="challenge-card"><p>Pravidelné <strong>bezpečnostní školení</strong>?</p></div>
-          <div class="challenge-card"><p>Víte, co dělat, <strong>když se „to" stane</strong>?</p></div>
-        </div>
+    <div class="page-header"><h2 class="hero-heading">Co plánujeme</h2></div>
+    <div class="page-body">
+      <h3>Digitalizace HR + IT procesů</h3>
+      <ul class="compact-list">
+        <li>Automatizace přístupů podle rolí</li>
+        <li>Omezení lidských chyb</li>
+        <li>Sběr dat pro controlling</li>
+        <li>AI agenti pro onboarding a helpdesk</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- BLOK 6c: Výzva pro partnery -->
+  <section class="page" data-block="block6">
+    <div class="page-header"><h2 class="hero-heading">Výzva pro partnery</h2></div>
+    <div class="page-body">
+      <div class="challenge-cards">
+        <div class="challenge-card"><p>Máte off-boarding, který IT informuje <strong>do 24h</strong>?</p></div>
+        <div class="challenge-card"><p>Víte, <strong>kdo</strong> má přístup <strong>k čemu</strong>?</p></div>
+        <div class="challenge-card"><p>Pravidelné <strong>bezpečnostní školení</strong>?</p></div>
+        <div class="challenge-card"><p>Víte, co dělat, <strong>když se „to" stane</strong>?</p></div>
       </div>
     </div>
   </section>
 
-  <!-- DISKUSE -->
+  <!-- DISKUSE (now before conclusion) -->
   <section class="page page-discussion" data-block="discussion">
     <div class="page-inner"><h2>Diskuse a sdílení</h2><p>Prostor pro otevřenou diskusi</p></div>
   </section>
 
-  <!-- ZÁVĚR -->
+  <!-- ZÁVĚR (now after discussion) -->
   <section id="conclusion" class="page" data-block="conclusion" data-minutes="5">
     <div class="page-inner conclusion-content">
       <h2>3 věci, které si odnést</h2>
