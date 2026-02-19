@@ -370,9 +370,6 @@
         <div class="ms-card"><h4 class="term" data-term="EDR" data-def="Endpoint Detection and Response – pokročilá detekce a automatická reakce na hrozby na zařízeních.">Defender / EDR</h4><p>Ochrana endpointů</p></div>
         <div class="ms-card"><h4 class="term" data-term="CASB" data-def="Cloud Access Security Broker – kontrola a zabezpečení přístupu ke cloudovým aplikacím.">Cloud Apps / CASB</h4><p>Cloudová kontrola</p></div>
         <div class="ms-card"><h4 class="term" data-term="SIEM & SOAR" data-def="SIEM = sběr a analýza bezpečnostních událostí. SOAR = automatizace bezpečnostních reakcí.">SIEM &amp; SOAR</h4><p>Automatizace</p></div>
-      </div>
-      <h3 style="margin-top: 36px;">Další směry</h3>
-      <div class="ms365-grid">
         <div class="ms-card"><h4 class="term" data-term="Zero Trust" data-def="Bezpečnostní model: ověřuj vždy, nevěř nikomu automaticky. Kontroluje se zařízení i uživatel.">Zero Trust</h4><p>Nikdy nedůvěřuj, vždy ověřuj</p></div>
         <div class="ms-card"><h4 class="term" data-term="Passwordless" data-def="Přihlašování bez hesla – biometrie, bezpečnostní klíč nebo push notifikace místo tradičního hesla.">Passwordless</h4><p>Přihlašování bez hesel</p></div>
         <div class="ms-card"><h4 class="term" data-term="Hybridní cloud" data-def="Kombinace on-premise infrastruktury a cloudových služeb – flexibilita, škálovatelnost, redundance.">Hybridní cloud</h4><p>On-premise + cloud</p></div>
@@ -384,21 +381,33 @@
   <section class="page" data-block="block5">
     <div class="page-header"><h2 class="hero-heading">Strategie a compliance</h2></div>
     <div class="page-body four-col-layout">
-      <div>
+      <div class="strategy-card">
         <h3><span class="term" data-term="Zero Trust" data-def="Bezpečnostní model: ověřuj vždy, nevěř nikomu automaticky. Kontroluje se zařízení (splňuje bezpečnostní podmínky?) i uživatel (má oprávnění k dané akci?).">Zero Trust</span></h3>
-        <p>Kontrola <strong>zařízení</strong> – splňuje bezpečnostní podmínky? Kontrola <strong>uživatele</strong> – má oprávnění k dané akci? Platí i pro AI agenty.</p>
+        <ul class="compact-list">
+          <li>Kontrola <strong>zařízení</strong> – splňuje podmínky?</li>
+          <li>Kontrola <strong>uživatele</strong> – má oprávnění?</li>
+          <li>Platí i pro AI agenty</li>
+        </ul>
       </div>
-      <div>
+      <div class="strategy-card">
         <h3><span class="term" data-term="GRC" data-def="Governance, Risk, Compliance – řízení, řízení rizik a shoda s předpisy a regulacemi.">GRC</span> v SmartSuite</h3>
-        <div class="grc-tags">
-          <span>Rizika</span><span>Incidenty</span><span>Politiky</span><span>Normy a směrnice</span><span>Zákony</span><span>Standardy</span><span>Audity</span><span class="term" data-term="BC plán" data-def="Business Continuity plán – plán zajištění kontinuity provozu při výpadku IT nebo jiné krizové situaci.">BC plán</span><span class="term" data-term="DR plán" data-def="Disaster Recovery – plán obnovy IT systémů a dat po havárii nebo katastrofě.">DR plán</span><span>Evidence IT aktiv</span>
-        </div>
+        <ul class="compact-list">
+          <li>Rizika a incidenty</li>
+          <li>Politiky a normy</li>
+          <li><span class="term" data-term="BC plán" data-def="Business Continuity plán – plán zajištění kontinuity provozu při výpadku IT nebo jiné krizové situaci.">BC</span> / <span class="term" data-term="DR plán" data-def="Disaster Recovery – plán obnovy IT systémů a dat po havárii nebo katastrofě.">DR</span> plány</li>
+          <li>Evidence IT aktiv</li>
+        </ul>
       </div>
-      <div>
+      <div class="strategy-card">
         <h3><span class="term" data-term="NIS2" data-def="Nová evropská směrnice pro kybernetickou bezpečnost. Dotkne se i stavebních firem jako dodavatelů.">NIS2</span></h3>
-        <p>Nová evropská regulace i pro <strong>stavebnictví</strong>. Povinnosti: řízení rizik, hlášení incidentů, odpovědnost vedení.</p>
+        <ul class="compact-list">
+          <li>Nová regulace i pro <strong>stavebnictví</strong></li>
+          <li>Řízení rizik</li>
+          <li>Hlášení incidentů</li>
+          <li>Odpovědnost vedení</li>
+        </ul>
       </div>
-      <div>
+      <div class="strategy-card">
         <h3>Digitalizace</h3>
         <ul class="compact-list">
           <li>Integrace systémů</li>
@@ -454,8 +463,8 @@
 
   <!-- ZÁVĚR: 3 věci -->
   <section id="conclusion" class="page" data-block="conclusion" data-minutes="5">
+    <div class="page-header"><h2 class="hero-heading">3 věci, které si odnést</h2></div>
     <div class="page-inner conclusion-content">
-      <h2>3 věci, které si odnést</h2>
       <div class="takeaway-cards">
         <div class="takeaway-card"><span class="takeaway-num">1</span><p>Kybernetická bezpečnost = <strong>způsob řízení firmy</strong></p></div>
         <div class="takeaway-card"><span class="takeaway-num">2</span><p>Lidský faktor a procesy jsou rozhodující – <strong>IT vše nezachrání</strong></p></div>
