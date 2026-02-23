@@ -349,7 +349,25 @@ main {
 .impact-card span { font-size: 1.2rem; flex-shrink: 0; }
 .impact-card h4 { font-size: 0.82rem; margin: 0; }
 
-/* ==================== PILLARS ==================== */
+/* ==================== PILLARS (process arrows) ==================== */
+.pillars-process { display: flex; gap: 0; width: 100%; }
+.pillar-arrow {
+  flex: 1; position: relative; padding: 28px 32px 28px 40px;
+  text-align: center; color: #fff;
+  clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 50%, calc(100% - 24px) 100%, 0 100%, 24px 50%);
+  transition: filter 0.35s ease;
+}
+.pillar-arrow:first-child { clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 50%, calc(100% - 24px) 100%, 0 100%); padding-left: 32px; border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+.pillar-arrow:last-child { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 24px 50%); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.pillar-arrow:hover { filter: brightness(1.1); }
+.pillar-arrow.pillar-blue { background: rgba(61,122,181,0.85); }
+.pillar-arrow.pillar-orange { background: rgba(201,122,74,0.85); }
+.pillar-arrow.pillar-green { background: rgba(90,158,111,0.85); }
+.pillar-arrow .pillar-icon { font-size: 1.4rem; margin-bottom: 6px; }
+.pillar-arrow h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 4px; color: #fff; }
+.pillar-arrow small { font-size: 0.68rem; color: rgba(255,255,255,0.8); font-style: italic; }
+
+/* Legacy pillar styles (unused but kept for safety) */
 .pillars-row { display: flex; flex-direction: column; gap: 18px; }
 .pillar {
   background: var(--glass); backdrop-filter: var(--glass-blur);
@@ -358,12 +376,12 @@ main {
   transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 .pillar:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-.pillar-blue { border-left: 4px solid var(--psg-blue); }
-.pillar-orange { border-left: 4px solid var(--accent-orange); }
-.pillar-green { border-left: 4px solid var(--accent-green); }
 .pillar-icon { font-size: 1.6rem; margin-bottom: 6px; }
 .pillar h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 4px; }
 .pillar small { font-size: 0.68rem; color: var(--text-light); font-style: italic; }
+
+/* Impact cards row (horizontal) */
+.impact-cards-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 
 /* ==================== DEFENSE ROW ==================== */
 .defense-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
@@ -384,6 +402,7 @@ main {
 
 /* ==================== GAPS GRID ==================== */
 .gaps-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-bottom: 36px; }
+.gaps-grid-3 { grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .gap-card {
   background: rgba(201,168,76,0.05); backdrop-filter: var(--glass-blur);
   border: 1px solid rgba(201,168,76,0.1); border-radius: var(--radius);
@@ -656,7 +675,7 @@ strong { color: var(--text-dark); }
 /* ==================== GLOSSARY BAR (bottom – auto, all visible terms) ==================== */
 .glossary-bar {
   position: fixed; bottom: 0; left: 0; right: 80px;
-  padding: 16px 40px 18px;
+  padding: 10px 30px 12px;
   z-index: 100;
   background: rgba(237, 242, 248, 0.75);
   backdrop-filter: blur(28px);
@@ -669,11 +688,11 @@ strong { color: var(--text-dark); }
 .glossary-bar.visible { transform: translateY(0); opacity: 1; }
 .glossary-bar.hidden { transform: translateY(100%); opacity: 0; }
 
-.glossary-entries { display: flex; flex-wrap: wrap; gap: 10px 36px; }
-.glossary-entry { display: flex; align-items: baseline; gap: 10px; }
-.glossary-term { font-weight: 700; font-size: 0.72rem; white-space: nowrap; flex-shrink: 0; color: var(--psg-blue); }
-.glossary-sep { color: var(--text-light); font-size: 0.68rem; }
-.glossary-def { font-size: 0.68rem; color: var(--text-muted); line-height: 1.45; }
+.glossary-entries { display: flex; flex-wrap: wrap; gap: 6px 28px; }
+.glossary-entry { display: flex; align-items: baseline; gap: 7px; }
+.glossary-term { font-weight: 700; font-size: 0.54rem; white-space: nowrap; flex-shrink: 0; color: var(--psg-blue); }
+.glossary-sep { color: var(--text-light); font-size: 0.51rem; }
+.glossary-def { font-size: 0.51rem; color: var(--text-muted); line-height: 1.4; }
 
 /* ==================== DISCUSSION PAGE ==================== */
 .page-discussion { background: transparent; }
@@ -714,6 +733,8 @@ strong { color: var(--text-dark); }
   .defense-row { grid-template-columns: 1fr; }
   .three-col-layout { grid-template-columns: 1fr 1fr; }
   .four-col-layout { grid-template-columns: 1fr 1fr; }
+  .gaps-grid-3 { grid-template-columns: 1fr 1fr; }
+  .impact-cards-row { grid-template-columns: 1fr 1fr; }
   .campaign-steps-row { grid-template-columns: 1fr 1fr; }
   .hr-blocks { grid-template-columns: 1fr; }
   .carousel-slide { width: 85%; }
@@ -728,6 +749,10 @@ strong { color: var(--text-dark); }
   .four-col-layout { grid-template-columns: 1fr; }
   .system-grid { grid-template-columns: 1fr 1fr; }
   .gaps-grid { grid-template-columns: 1fr; }
+  .gaps-grid-3 { grid-template-columns: 1fr; }
+  .impact-cards-row { grid-template-columns: 1fr 1fr; }
+  .pillars-process { flex-direction: column; }
+  .pillar-arrow, .pillar-arrow:first-child, .pillar-arrow:last-child { clip-path: none; border-radius: var(--radius-sm); padding: 20px; }
   .stats-grid { grid-template-columns: repeat(3, 1fr); }
   .access-map { grid-template-columns: repeat(2, 1fr); }
   .ms365-grid { grid-template-columns: 1fr 1fr; }
