@@ -163,9 +163,36 @@
     carouselObserver.observe(carousel);
   });
 
+  // ==================== FULLSCREEN ====================
+  const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  }
+
+  function updateFullscreenBtn() {
+    if (fullscreenBtn) {
+      fullscreenBtn.innerHTML = document.fullscreenElement ? '&#x2716;' : '&#x26F6;';
+      fullscreenBtn.title = document.fullscreenElement ? 'Ukončit celou obrazovku (F / Esc)' : 'Celá obrazovka (F)';
+    }
+  }
+
+  if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
+  document.addEventListener('fullscreenchange', updateFullscreenBtn);
+
   // ==================== KEYBOARD ====================
   document.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+    if (e.key === 'f' || e.key === 'F') {
+      e.preventDefault();
+      toggleFullscreen();
+      return;
+    }
 
     if (e.key === 'ArrowLeft' && activeCarousel) {
       e.preventDefault();
