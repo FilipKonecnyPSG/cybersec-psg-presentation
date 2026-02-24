@@ -74,7 +74,7 @@ h1, h2, h3, h4 { color: var(--text-dark); }
   justify-content: center;
   position: relative;
   z-index: 1;
-  padding: 72px 80px 56px 56px;
+  padding: 72px 80px 80px 56px;
   gap: 8px;
 }
 
@@ -675,7 +675,7 @@ strong { color: var(--text-dark); }
 /* ==================== GLOSSARY BAR (bottom – auto, all visible terms) ==================== */
 .glossary-bar {
   position: fixed; bottom: 0; left: 0; right: 80px;
-  padding: 10px 30px 12px;
+  padding: 12px 36px 14px;
   z-index: 100;
   background: rgba(237, 242, 248, 0.75);
   backdrop-filter: blur(28px);
@@ -688,11 +688,11 @@ strong { color: var(--text-dark); }
 .glossary-bar.visible { transform: translateY(0); opacity: 1; }
 .glossary-bar.hidden { transform: translateY(100%); opacity: 0; }
 
-.glossary-entries { display: flex; flex-wrap: wrap; gap: 6px 28px; }
-.glossary-entry { display: flex; align-items: baseline; gap: 7px; }
-.glossary-term { font-weight: 700; font-size: 0.54rem; white-space: nowrap; flex-shrink: 0; color: var(--psg-blue); }
-.glossary-sep { color: var(--text-light); font-size: 0.51rem; }
-.glossary-def { font-size: 0.51rem; color: var(--text-muted); line-height: 1.4; }
+.glossary-entries { display: flex; flex-wrap: wrap; gap: 8px 32px; }
+.glossary-entry { display: flex; align-items: baseline; gap: 8px; }
+.glossary-term { font-weight: 700; font-size: 0.62rem; white-space: nowrap; flex-shrink: 0; color: var(--psg-blue); }
+.glossary-sep { color: var(--text-light); font-size: 0.58rem; }
+.glossary-def { font-size: 0.58rem; color: var(--text-muted); line-height: 1.45; }
 
 /* ==================== DISCUSSION PAGE ==================== */
 .page-discussion { background: transparent; }
@@ -729,7 +729,7 @@ strong { color: var(--text-dark); }
   html { font-size: 18px; }
   .hero-title { font-size: 2.8rem; }
   .hero-heading { font-size: 2rem; }
-  .page { padding: 64px 80px 44px 40px; }
+  .page { padding: 64px 80px 80px 40px; }
   .defense-row { grid-template-columns: 1fr; }
   .three-col-layout { grid-template-columns: 1fr 1fr; }
   .four-col-layout { grid-template-columns: 1fr 1fr; }
