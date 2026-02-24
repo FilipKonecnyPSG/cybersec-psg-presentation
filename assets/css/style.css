@@ -690,9 +690,9 @@ strong { color: var(--text-dark); }
 
 .glossary-entries { display: flex; flex-wrap: wrap; gap: 8px 32px; }
 .glossary-entry { display: flex; align-items: baseline; gap: 8px; }
-.glossary-term { font-weight: 700; font-size: 0.62rem; white-space: nowrap; flex-shrink: 0; color: var(--psg-blue); }
-.glossary-sep { color: var(--text-light); font-size: 0.58rem; }
-.glossary-def { font-size: 0.58rem; color: var(--text-muted); line-height: 1.45; }
+.glossary-term { font-weight: 700; font-size: 0.68rem; white-space: nowrap; flex-shrink: 0; color: var(--psg-blue); }
+.glossary-sep { color: var(--text-light); font-size: 0.64rem; }
+.glossary-def { font-size: 0.64rem; color: var(--text-muted); line-height: 1.45; }
 
 /* ==================== DISCUSSION PAGE ==================== */
 .page-discussion { background: transparent; }
